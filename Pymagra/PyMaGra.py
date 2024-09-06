@@ -2381,7 +2381,7 @@ class Main(QtWidgets.QWidget):
         """
         dd, kk = self.log_spect(data, d, n_coef)
         if not dd[0]:
-            return None, None, -1, None, None, None, [None], [None]
+            return None, None, -1, None, None, None, [None], [None], [None], [None]
         if kk[-1] < 0:
             index = kk > 0
             dd = dd[index]
@@ -2547,12 +2547,13 @@ class Main(QtWidgets.QWidget):
             y = np.zeros(n_Ny - 1)
             y[:] = np.nan
             y[n0 : isplit + 1] = intercept1 - kk[n0 : isplit + 1] * depth1 * 2
-            y[isplit + 2 :] = intercept2 - kk[isplit + 2 :] * depth2 * 2
+            nmx = min(len(kk),len(y))
+            y[isplit + 2 :nmx] = intercept2 - kk[isplit + 2 :nmx] * depth2 * 2
             y[isplit + 1] = np.nan
             self.fig_FFT = newWindow("FFT", 800, 500)
             self.ax_FFT = self.fig_FFT.fig.add_subplot()
             self.ax_FFT.plot(kk, dd, "k")
-            self.ax_FFT.plot(kk, y, "r")
+            self.ax_FFT.plot(kk[:nmx], y[:nmx], "r")
             self.ax_FFT.plot(kkk, d, "r*")
             self.ax_FFT.text(
                 np.mean(kk[n0 : isplit + 1]) + dk,
@@ -3298,7 +3299,7 @@ class Main(QtWidgets.QWidget):
         """
         # Calculate analytic signal of first sensor
         d = self.dat[self.actual_plotted_file].data[0]["direction"]
-        if d in ("N", "S"):
+        if d in ("N", "S", 0., 180.):
             direction = 0
         else:
             direction = 1
@@ -3448,10 +3449,11 @@ class Main(QtWidgets.QWidget):
             self.get_mouse_click(self.fig_q)
             dmin = self.x_mouse
             self.fig_q.close()
+            dmx = dx*20.
             results, okButton = dialog(
                 ["Threshold", "Minimum depth", "Maximum depth"],
                 ["e", "e", "e"],
-                [dmin, 0, 2000],
+                [dmin, 0, dmx],
                 "Analytic signal parameters",
             )
             if okButton:
@@ -3664,7 +3666,8 @@ class Main(QtWidgets.QWidget):
                 anchor=(0, 0),
                 shrink=0.5,
             )
-            dbar.ax.set_ylabel("depth [m]")
+            dbar.ax.tick_params(labelsize=14)
+            dbar.ax.set_ylabel("depth [m]", fontsize=14)
             ncd = -int(np.log10(dmin)) + 2
             self.ax_ana.set_title(
                 f"{self.dat[self.actual_plotted_file].data['type']}"
