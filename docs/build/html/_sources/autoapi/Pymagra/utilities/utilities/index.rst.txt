@@ -5,7 +5,7 @@ Pymagra.utilities.utilities
 
 .. autoapi-nested-parse::
 
-   Last modified on Aug. 26, 2024
+   Last modified on Sep. 06, 2024
 
    @author: Hermann Zeyen <hermann.zeyen@universite-paris-saclay.fr>
             Université Paris-Saclay, France
@@ -210,7 +210,7 @@ Module Contents
 
 
 
-   .. py:method:: diurnal_correction(degree=3, diff_weight=5.0)
+   .. py:method:: diurnal_correction(degree=3)
 
       Apply diurnal corrections
       The diurnal variations may come from base station data (function read_base)
@@ -227,29 +227,21 @@ Module Contents
       :param degree: Degree of polynom to be fitted to data. The default is 3.
                      This parameter is only used if no base station data exist
       :type degree: int, optional
-      :param diff_weight: If day_joint_flag is true, diff_weight defines the relative weight
-                          for the fit of the differences along the block edges with respect
-                          to the fit of the medians.
-      :type diff_weight: float, optional
 
 
 
-   .. py:method:: diurnal_variation(data, lines, degree=3, diff_weight=1.0)
+   .. py:method:: diurnal_variation(times, data, degree=3)
 
       Calculate a fit of degree "degree" to the data of lines "lines" which
       will be used for correction of diurnal variations if not base station
       data exist
 
-      :param lines: Numbers of the lines to be used for calculation of diurnal variations.
-                    If several files have been loaded, acquired at different days, the
-                    fit may be calculated independently for every day.
-      :type lines: 1D numpy int array
+      :param times: Times for the data to be fitted in seconds
+      :type times: 1D numpy float array
+      :param data: Data to be fitted (usually a series of line medians)
+      :type data: 1D numpy float array
       :param degree: Degree of polynom to be fitted to data. The default is 3.
       :type degree: int, optional
-      :param diff_weight: If all blocks are inverted together, diff_weight is the weight
-                          given to fit of differences along the edges with respect to fit
-                          of medians in each block. The default is 1.
-      :type diff_weight: float, optional
 
       :returns: * *Polynome coefficients (1D numpy array of size degree+1)* -- The polynome is calculated as
                   P[degree]+P[degree-1]*x+P[degree-2]*x**2...+P[0]*x**degree

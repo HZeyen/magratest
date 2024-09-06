@@ -16,6 +16,6 @@ Module Contents
 ---------------
 
 .. py:data:: __version__
-   :value: '24.8.3'
+   :value: '24.9.1'
 
 

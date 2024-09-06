@@ -5,7 +5,7 @@ Pymagra.PyMaGra
 
 .. autoapi-nested-parse::
 
-   last modified on Aug 28, 2024
+   last modified on Sep 06, 2024
 
    @author: Hermann Zeyen <hermann.zeyen@universite-paris-saclay.fr>
             University Paris-Saclay, France
@@ -55,6 +55,12 @@ Module Contents
    .. method:: __init__ : Initialization
 
    .. method:: readdata : Input data sets
+
+   .. method:: check_data : Check if magnetic data contain errors (mainly nulls)
+
+   .. method:: file_change : plot another already opened data file
+
+   .. method:: join_daa : Join all available data sets into one common set.
 
    .. method:: getGeography : Get geography information (towns, geological borders...)
 
@@ -157,6 +163,36 @@ Module Contents
 
 
 
+   .. py:attribute:: base_files
+      :value: []
+
+
+
+   .. py:attribute:: dat
+      :value: []
+
+
+
+   .. py:attribute:: dat_ori
+      :value: []
+
+
+
+   .. py:attribute:: data_files
+      :value: []
+
+
+
+   .. py:attribute:: file_types
+      :value: []
+
+
+
+   .. py:attribute:: data_types
+      :value: []
+
+
+
    .. py:attribute:: percent
       :value: 0.01
 
@@ -243,11 +279,6 @@ Module Contents
    .. py:attribute:: treatments
 
 
-   .. py:attribute:: actual_plotted_file
-      :value: 0
-
-
-
    .. py:attribute:: u
 
 
@@ -271,6 +302,11 @@ Module Contents
 
    .. py:attribute:: declination
       :value: 0.0
+
+
+
+   .. py:attribute:: field_flag
+      :value: False
 
 
 
@@ -625,6 +661,11 @@ Module Contents
    .. py:attribute:: w
 
 
+   .. py:attribute:: actual_plotted_file
+      :value: 0
+
+
+
    .. py:attribute:: x
 
 
@@ -645,6 +686,55 @@ Module Contents
       normally, Geometrics stn files should be read, but another format is
       also possible, considered to be output of program mgwin.
       See Geometrics.read_txt for more information
+
+      :rtype: None.
+
+
+
+   .. py:method:: check_data(data, file)
+
+      Check magnetic data for consitency
+
+      Data acquired with PPM or Cs/Rb magnetometers may have null measurements
+      if the sensors are placed parallel or perpendicular to the Earth's
+      field. Program checks whether the minimum or maximum values in a data
+      set are smaller/larger than the median by more than 20000 nT and if so,
+      it gives a warning message proposing to clean up the data using
+      Utilities -> Clean data before any other treatment.
+
+      :param data: Contains all data of a data set. entries "s1", "s2" and "grad_data"
+                   are used
+      :type data: dictionary
+      :param file: File name of the data set (only used in the warning message).
+      :type file: str
+
+      :rtype: None.
+
+
+
+   .. py:method:: file_change()
+
+      Choose another file to be represented and treated.
+
+      Dialogue box presents a list of available files other than the one
+      actually on the screen and allows to choose by clicking a radio button.
+      Clicking on Cancel keeps the actual data.
+
+      :rtype: None.
+
+
+
+   .. py:method:: join_data()
+
+      Joins al available data sets into one common data set
+
+      All data must have the same data type (magnetic vs gravity) and be
+      located in the same coordinate system. If the different data blocks are
+      not contiguous in space, program will interpolate meaningless "data".
+
+      The original data sets are maintained such that using file_change, one
+      may return to one of the smaller data sets. If later a new data set is
+      added and data are joint again, the joint data set is excluded.
 
       :rtype: None.
 

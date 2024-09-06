@@ -921,6 +921,9 @@
    </property>
   </action>
   <action name="join">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Join data sets</string>
    </property>

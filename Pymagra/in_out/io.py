@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Last modified on Aug 26, 2024
+Last modified on Sep 06, 2024
 
 @author: Hermann Zeyen <hermann.zeyen@universite-paris-saclay.fr>
          University Paris-Saclay, France
@@ -1004,7 +1004,8 @@ class Data:
 
         """
         self.base = Geometrics()
-        print(f"\nRead base station file {file}")
+        if not "temp" in file:
+            print(f"\nRead base station file {file}")
         self.base.read_base(file, year=year)
 
     def write_base(self, file):

@@ -47,7 +47,7 @@
             
   <section id="module-Pymagra.PyMaGra">
 <span id="pymagra-pymagra"></span><h1>Pymagra.PyMaGra<a class="headerlink" href="#module-Pymagra.PyMaGra" title="Link to this heading">¶</a></h1>
-<p>last modified on Aug 28, 2024</p>
+<p>last modified on Sep 06, 2024</p>
 <dl class="simple">
 <dt>&#64;author: Hermann Zeyen &lt;<a class="reference external" href="mailto:hermann&#46;zeyen&#37;&#52;&#48;universite-paris-saclay&#46;fr">hermann<span>&#46;</span>zeyen<span>&#64;</span>universite-paris-saclay<span>&#46;</span>fr</a>&gt;</dt><dd><p>University Paris-Saclay, France</p>
 </dd>
@@ -100,6 +100,21 @@ Magnetics.ui</p>
 <dl class="py method">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">readdata</span> <span class="pre">:</span> <span class="pre">Input</span> <span class="pre">data</span> <span class="pre">sets</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">check_data</span> <span class="pre">:</span> <span class="pre">Check</span> <span class="pre">if</span> <span class="pre">magnetic</span> <span class="pre">data</span> <span class="pre">contain</span> <span class="pre">errors</span> <span class="pre">(mainly</span> <span class="pre">nulls)</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">file_change</span> <span class="pre">:</span> <span class="pre">plot</span> <span class="pre">another</span> <span class="pre">already</span> <span class="pre">opened</span> <span class="pre">data</span> <span class="pre">file</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">join_daa</span> <span class="pre">:</span> <span class="pre">Join</span> <span class="pre">all</span> <span class="pre">available</span> <span class="pre">data</span> <span class="pre">sets</span> <span class="pre">into</span> <span class="pre">one</span> <span class="pre">common</span> <span class="pre">set.</span></span></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -333,6 +348,36 @@ Magnetics.ui</p>
 <dd></dd></dl>
 
 <dl class="py attribute">
+<dt class="sig sig-object py" id="Pymagra.PyMaGra.Main.base_files">
+<span class="sig-name descname"><span class="pre">base_files</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#Pymagra.PyMaGra.Main.base_files" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Pymagra.PyMaGra.Main.dat">
+<span class="sig-name descname"><span class="pre">dat</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#Pymagra.PyMaGra.Main.dat" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Pymagra.PyMaGra.Main.dat_ori">
+<span class="sig-name descname"><span class="pre">dat_ori</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#Pymagra.PyMaGra.Main.dat_ori" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Pymagra.PyMaGra.Main.data_files">
+<span class="sig-name descname"><span class="pre">data_files</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#Pymagra.PyMaGra.Main.data_files" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Pymagra.PyMaGra.Main.file_types">
+<span class="sig-name descname"><span class="pre">file_types</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#Pymagra.PyMaGra.Main.file_types" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Pymagra.PyMaGra.Main.data_types">
+<span class="sig-name descname"><span class="pre">data_types</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#Pymagra.PyMaGra.Main.data_types" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
 <dt class="sig sig-object py" id="Pymagra.PyMaGra.Main.percent">
 <span class="sig-name descname"><span class="pre">percent</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.01</span></em><a class="headerlink" href="#Pymagra.PyMaGra.Main.percent" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -423,11 +468,6 @@ Magnetics.ui</p>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="Pymagra.PyMaGra.Main.actual_plotted_file">
-<span class="sig-name descname"><span class="pre">actual_plotted_file</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#Pymagra.PyMaGra.Main.actual_plotted_file" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
 <dt class="sig sig-object py" id="Pymagra.PyMaGra.Main.u">
 <span class="sig-name descname"><span class="pre">u</span></span><a class="headerlink" href="#Pymagra.PyMaGra.Main.u" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -455,6 +495,11 @@ Magnetics.ui</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="Pymagra.PyMaGra.Main.declination">
 <span class="sig-name descname"><span class="pre">declination</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.0</span></em><a class="headerlink" href="#Pymagra.PyMaGra.Main.declination" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Pymagra.PyMaGra.Main.field_flag">
+<span class="sig-name descname"><span class="pre">field_flag</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#Pymagra.PyMaGra.Main.field_flag" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -813,6 +858,11 @@ Magnetics.ui</p>
 <dd></dd></dl>
 
 <dl class="py attribute">
+<dt class="sig sig-object py" id="Pymagra.PyMaGra.Main.actual_plotted_file">
+<span class="sig-name descname"><span class="pre">actual_plotted_file</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#Pymagra.PyMaGra.Main.actual_plotted_file" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
 <dt class="sig sig-object py" id="Pymagra.PyMaGra.Main.x">
 <span class="sig-name descname"><span class="pre">x</span></span><a class="headerlink" href="#Pymagra.PyMaGra.Main.x" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -839,6 +889,61 @@ Magnetics.ui</p>
 normally, Geometrics stn files should be read, but another format is
 also possible, considered to be output of program mgwin.
 See Geometrics.read_txt for more information</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Pymagra.PyMaGra.Main.check_data">
+<span class="sig-name descname"><span class="pre">check_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Pymagra.PyMaGra.Main.check_data" title="Link to this definition">¶</a></dt>
+<dd><p>Check magnetic data for consitency</p>
+<p>Data acquired with PPM or Cs/Rb magnetometers may have null measurements
+if the sensors are placed parallel or perpendicular to the Earth’s
+field. Program checks whether the minimum or maximum values in a data
+set are smaller/larger than the median by more than 20000 nT and if so,
+it gives a warning message proposing to clean up the data using
+Utilities -&gt; Clean data before any other treatment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>dictionary</em>) – Contains all data of a data set. entries “s1”, “s2” and “grad_data”
+are used</p></li>
+<li><p><strong>file</strong> (<em>str</em>) – File name of the data set (only used in the warning message).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Pymagra.PyMaGra.Main.file_change">
+<span class="sig-name descname"><span class="pre">file_change</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Pymagra.PyMaGra.Main.file_change" title="Link to this definition">¶</a></dt>
+<dd><p>Choose another file to be represented and treated.</p>
+<p>Dialogue box presents a list of available files other than the one
+actually on the screen and allows to choose by clicking a radio button.
+Clicking on Cancel keeps the actual data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Pymagra.PyMaGra.Main.join_data">
+<span class="sig-name descname"><span class="pre">join_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Pymagra.PyMaGra.Main.join_data" title="Link to this definition">¶</a></dt>
+<dd><p>Joins al available data sets into one common data set</p>
+<p>All data must have the same data type (magnetic vs gravity) and be
+located in the same coordinate system. If the different data blocks are
+not contiguous in space, program will interpolate meaningless “data”.</p>
+<p>The original data sets are maintained such that using file_change, one
+may return to one of the smaller data sets. If later a new data set is
+added and data are joint again, the joint data set is excluded.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>None.</p>
@@ -1589,6 +1694,12 @@ Closes window</p>
 <li><a class="reference internal" href="#Pymagra.PyMaGra.Main"><code class="docutils literal notranslate"><span class="pre">Main</span></code></a><ul>
 <li><a class="reference internal" href="#Pymagra.PyMaGra.Main.function"><code class="docutils literal notranslate"><span class="pre">Main.function</span></code></a></li>
 <li><a class="reference internal" href="#Pymagra.PyMaGra.Main.data_read"><code class="docutils literal notranslate"><span class="pre">Main.data_read</span></code></a></li>
+<li><a class="reference internal" href="#Pymagra.PyMaGra.Main.base_files"><code class="docutils literal notranslate"><span class="pre">Main.base_files</span></code></a></li>
+<li><a class="reference internal" href="#Pymagra.PyMaGra.Main.dat"><code class="docutils literal notranslate"><span class="pre">Main.dat</span></code></a></li>
+<li><a class="reference internal" href="#Pymagra.PyMaGra.Main.dat_ori"><code class="docutils literal notranslate"><span class="pre">Main.dat_ori</span></code></a></li>
+<li><a class="reference internal" href="#Pymagra.PyMaGra.Main.data_files"><code class="docutils literal notranslate"><span class="pre">Main.data_files</span></code></a></li>
+<li><a class="reference internal" href="#Pymagra.PyMaGra.Main.file_types"><code class="docutils literal notranslate"><span class="pre">Main.file_types</span></code></a></li>
+<li><a class="reference internal" href="#Pymagra.PyMaGra.Main.data_types"><code class="docutils literal notranslate"><span class="pre">Main.data_types</span></code></a></li>
 <li><a class="reference internal" href="#Pymagra.PyMaGra.Main.percent"><code class="docutils literal notranslate"><span class="pre">Main.percent</span></code></a></li>
 <li><a class="reference internal" href="#Pymagra.PyMaGra.Main.mincol1"><code class="docutils literal notranslate"><span class="pre">Main.mincol1</span></code></a></li>
 <li><a class="reference internal" href="#Pymagra.PyMaGra.Main.maxcol1"><code class="docutils literal notranslate"><span class="pre">Main.maxcol1</span></code></a></li>
@@ -1607,13 +1718,13 @@ Closes window</p>
 <li><a class="reference internal" href="#Pymagra.PyMaGra.Main.color"><code class="docutils literal notranslate"><span class="pre">Main.color</span></code></a></li>
 <li><a class="reference internal" href="#Pymagra.PyMaGra.Main.lineaments"><code class="docutils literal notranslate"><span class="pre">Main.lineaments</span></code></a></li>
 <li><a class="reference internal" href="#Pymagra.PyMaGra.Main.treatments"><code class="docutils literal notranslate"><span class="pre">Main.treatments</span></code></a></li>
-<li><a class="reference internal" href="#Pymagra.PyMaGra.Main.actual_plotted_file"><code class="docutils literal notranslate"><span class="pre">Main.actual_plotted_file</span></code></a></li>
 <li><a class="reference internal" href="#Pymagra.PyMaGra.Main.u"><code class="docutils literal notranslate"><span class="pre">Main.u</span></code></a></li>
 <li><a class="reference internal" href="#Pymagra.PyMaGra.Main.line_choice"><code class="docutils literal notranslate"><span class="pre">Main.line_choice</span></code></a></li>
 <li><a class="reference internal" href="#Pymagra.PyMaGra.Main.dir0"><code class="docutils literal notranslate"><span class="pre">Main.dir0</span></code></a></li>
 <li><a class="reference internal" href="#Pymagra.PyMaGra.Main.fig_base"><code class="docutils literal notranslate"><span class="pre">Main.fig_base</span></code></a></li>
 <li><a class="reference internal" href="#Pymagra.PyMaGra.Main.inclination"><code class="docutils literal notranslate"><span class="pre">Main.inclination</span></code></a></li>
 <li><a class="reference internal" href="#Pymagra.PyMaGra.Main.declination"><code class="docutils literal notranslate"><span class="pre">Main.declination</span></code></a></li>
+<li><a class="reference internal" href="#Pymagra.PyMaGra.Main.field_flag"><code class="docutils literal notranslate"><span class="pre">Main.field_flag</span></code></a></li>
 <li><a class="reference internal" href="#Pymagra.PyMaGra.Main.geography"><code class="docutils literal notranslate"><span class="pre">Main.geography</span></code></a></li>
 <li><a class="reference internal" href="#Pymagra.PyMaGra.Main.base"><code class="docutils literal notranslate"><span class="pre">Main.base</span></code></a></li>
 <li><a class="reference internal" href="#Pymagra.PyMaGra.Main.fig_line"><code class="docutils literal notranslate"><span class="pre">Main.fig_line</span></code></a></li>
@@ -1685,11 +1796,15 @@ Closes window</p>
 <li><a class="reference internal" href="#Pymagra.PyMaGra.Main.cidpress"><code class="docutils literal notranslate"><span class="pre">Main.cidpress</span></code></a></li>
 <li><a class="reference internal" href="#Pymagra.PyMaGra.Main.string_keys"><code class="docutils literal notranslate"><span class="pre">Main.string_keys</span></code></a></li>
 <li><a class="reference internal" href="#Pymagra.PyMaGra.Main.w"><code class="docutils literal notranslate"><span class="pre">Main.w</span></code></a></li>
+<li><a class="reference internal" href="#Pymagra.PyMaGra.Main.actual_plotted_file"><code class="docutils literal notranslate"><span class="pre">Main.actual_plotted_file</span></code></a></li>
 <li><a class="reference internal" href="#Pymagra.PyMaGra.Main.x"><code class="docutils literal notranslate"><span class="pre">Main.x</span></code></a></li>
 <li><a class="reference internal" href="#Pymagra.PyMaGra.Main.y"><code class="docutils literal notranslate"><span class="pre">Main.y</span></code></a></li>
 <li><a class="reference internal" href="#Pymagra.PyMaGra.Main.help"><code class="docutils literal notranslate"><span class="pre">Main.help</span></code></a></li>
 <li><a class="reference internal" href="#Pymagra.PyMaGra.Main.grad_flag"><code class="docutils literal notranslate"><span class="pre">Main.grad_flag</span></code></a></li>
 <li><a class="reference internal" href="#Pymagra.PyMaGra.Main.readData"><code class="docutils literal notranslate"><span class="pre">Main.readData()</span></code></a></li>
+<li><a class="reference internal" href="#Pymagra.PyMaGra.Main.check_data"><code class="docutils literal notranslate"><span class="pre">Main.check_data()</span></code></a></li>
+<li><a class="reference internal" href="#Pymagra.PyMaGra.Main.file_change"><code class="docutils literal notranslate"><span class="pre">Main.file_change()</span></code></a></li>
+<li><a class="reference internal" href="#Pymagra.PyMaGra.Main.join_data"><code class="docutils literal notranslate"><span class="pre">Main.join_data()</span></code></a></li>
 <li><a class="reference internal" href="#Pymagra.PyMaGra.Main.getGeography"><code class="docutils literal notranslate"><span class="pre">Main.getGeography()</span></code></a></li>
 <li><a class="reference internal" href="#Pymagra.PyMaGra.Main.oneOfTwo"><code class="docutils literal notranslate"><span class="pre">Main.oneOfTwo()</span></code></a></li>
 <li><a class="reference internal" href="#Pymagra.PyMaGra.Main.readBaseData"><code class="docutils literal notranslate"><span class="pre">Main.readBaseData()</span></code></a></li>

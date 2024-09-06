@@ -5,7 +5,7 @@ Pymagra.in_out.io
 
 .. autoapi-nested-parse::
 
-   Last modified on Aug 26, 2024
+   Last modified on Sep 06, 2024
 
    @author: Hermann Zeyen <hermann.zeyen@universite-paris-saclay.fr>
             University Paris-Saclay, France
@@ -124,7 +124,7 @@ Module Contents
              * **declination** (*float*) -- Declination of Earth's field in degrees
 
 
-.. py:class:: Data
+.. py:class:: Data(n_block)
 
    Class contains methods for data management in program PyMaGra
 
@@ -238,9 +238,7 @@ Module Contents
    .. py:attribute:: data
 
 
-   .. py:attribute:: n_blocks
-      :value: 0
-
+   .. py:attribute:: n_block
 
 
    .. py:attribute:: n_lines
@@ -390,12 +388,13 @@ Module Contents
                 * **z** (*numpy float array*) -- height of lower sensor above ground of all data points.
                 * **time** (*numpy int array*) -- second of day of acquisition of all data points extracted.
                 * **mask** (*bool*) -- mask whether data should be plotted (True) or not (False)
-                * **direction** (*str*) -- may be "N", "S", "W" or "E", indicates the approximate line direction
+                * **direction** (*str*) -- Line direction with respect to magnetic North (positive from N to E)
                 * **sensor** (*int*) -- if 0, two sensors are used in vertical configuration. 1 if only one
                   sensor was used or sensor 1 in horizontal configuration. 2: sensor 2
                   in horizontal configuration.
                 * **median1** (*float*) -- Median value of line for data of sensor1.
-                * **median2** (*0 float*) -- Median value of line for data of sensor2.
+                * **median2** (*float*) -- Median value of line for data of sensor2.
+                * **block** (*int*) -- Number of data set having been read
 
 
 
@@ -415,6 +414,15 @@ Module Contents
                 - "y":  Numpy float array with N-S coordinates of data points
                 - "grad_flag" bool. True if 2 sensors were used, False if only one sensor
                 - "mask": bool, True if line should be plotted, False if excluded from plotting
+                - "direction": str, direction of a line with respect to magnetic N
+                  positive from N to E
+                - "sensor":
+                  if 0, two sensors are used in vertical configuration. 1 if only one
+                  sensor was used or sensor 1 in horizontal configuration. 2: sensor 2
+                  in horizontal configuration.
+                - "median1": float, median of data from sensor 1
+                - "median2": float, median of data from sensor 2
+                - "block": int, number of data set having been read
       :rtype: dictionary with one entry per line, key = number of line.
 
 

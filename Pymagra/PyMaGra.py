@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-last modified on Sep 04, 2024
+last modified on Sep 06, 2024
 
 @author: Hermann Zeyen <hermann.zeyen@universite-paris-saclay.fr>
          University Paris-Saclay, France
@@ -412,7 +412,7 @@ class Main(QtWidgets.QWidget):
             self.declination_ori = self.declination
             self.field_flag = True
         self.actual_plotted_file = ld
-        if len(self.dat)  > 1:
+        if len(self.dat) > 1:
             self.w.change_file.setEnabled(True)
             self.w.join.setEnabled(True)
         data_keys = list(self.dat[self.actual_plotted_file].data.keys())
@@ -1017,7 +1017,7 @@ class Main(QtWidgets.QWidget):
             if read_flag:
                 # If data set exists that has been interpolated onto a regular grid, use its
                 #    data, if not original ones
-                if inter:
+                if self.inter_flag:
                     # If left mouse click, plot line in Y direction
                     if ms == 1:
                         lin = np.argmin(np.abs(self.x_inter - xm))
@@ -1053,13 +1053,13 @@ class Main(QtWidgets.QWidget):
                     keys = list(data.keys())[: -self.string_keys]
                     pos_l = []
                     for k in keys:
-                        if data[k]["direction"] in ("N", "S"):
+                        if data[k]["direction"] in ("N", "S", 0., 180.):
                             pos_l.append(np.median(data[k]["x"]))
                         else:
                             pos_l.append(np.median(data[k]["y"]))
                     line_positions = np.unique(np.array(pos_l))
                     pos_l = np.array(pos_l)
-                    if data[keys[0]]["direction"] in ("N", "S"):
+                    if data[keys[0]]["direction"] in ("N", "S", 0., 180.):
                         lin = np.argmin(abs(line_positions - xm))
                     else:
                         lin = np.argmin(abs(line_positions - ym))
@@ -1070,7 +1070,7 @@ class Main(QtWidgets.QWidget):
                     if self.dat[self.actual_plotted_file].data["grad_data"]:
                         s2 = []
                     for k in keys:
-                        if data[k]["direction"] in ("N", "S"):
+                        if data[k]["direction"] in ("N", "S", 0., 180.):
                             if np.isclose(np.median(data[k]["x"]), pos_line):
                                 pos += list(data[k]["y"])
                                 s1 += list(data[k]["s1"])
@@ -1146,14 +1146,14 @@ class Main(QtWidgets.QWidget):
             # Left click inside an axis
             if self.mouse == 1:
                 lin = max(0, lin - 1)
-                if direction in ("N", "S"):
+                if direction in ("N", "S", 0., 180.):
                     xm = line_positions[lin]
                 else:
                     ym = line_positions[lin]
             # Right click inside an axis
             elif self.mouse == 3:
                 lin = min(lmax, lin + 1)
-                if direction in ("N", "S"):
+                if direction in ("N", "S", 0., 180.):
                     xm = line_positions[lin]
                 else:
                     ym = line_positions[lin]
@@ -1173,8 +1173,8 @@ class Main(QtWidgets.QWidget):
                 index = np.where((pos > min(x0, x1)) & (pos < max(x0, x1)))
                 if self.ywin > 200 or not data["grad_data"]:
                     s1[index] = np.nan
-                    if inter:
-                        if direction in ("N", "S"):
+                    if self.inter_flag:
+                        if direction in ("N", "S", 0., 180.):
                             self.sensor1_inter[:, lin] = s1
                         else:
                             self.sensor1_inter[lin, :] = s1
@@ -1186,8 +1186,8 @@ class Main(QtWidgets.QWidget):
                             i1 = i2
                 else:
                     s2[index] = np.nan
-                    if inter:
-                        if direction in ("N", "S"):
+                    if self.inter_flag:
+                        if direction in ("N", "S", 0., 180.):
                             self.sensor2_inter[:, lin] = s2
                         else:
                             self.sensor2_inter[lin, :] = s2
@@ -1841,7 +1841,7 @@ class Main(QtWidgets.QWidget):
 
         """
         data = self.dat[self.actual_plotted_file].data
-        if data[0]["direction"] in ("N", "S"):
+        if data[0]["direction"] in ("N", "S", 0., 180.):
             ddy = np.round(
                 abs(data[0]["y"][-1] - data[0]["y"][0]) / len(data[0]["y"]), 2
             )
@@ -2386,8 +2386,11 @@ class Main(QtWidgets.QWidget):
             index = kk > 0
             dd = dd[index]
             kk = kk[index]
-            dd = dd[: int(len(dd) / 10)]
-            kk = kk[: int(len(dd) / 10)]
+            # ndat = int(len(dd) / 10)
+            # if ndat < 10:
+            #     ndat = min(10,len(dd))
+            # kk = kk[: int(len(dd) / 10)]
+            # dd = dd[: int(len(dd) / 10)]
         # In order to avoid negative depths, the analysis is started at the coefficient
         #    having the maximum amplitude (excluding the first coefficient which is the
         #    average value)
@@ -2401,7 +2404,7 @@ class Main(QtWidgets.QWidget):
         n1 = n0 + 3
         n2 = len(d) - 3
         if n2 <= n1:
-            return None, None, -1, None, None, None, [None], [None]
+            return None, None, -1, None, None, None, [None], [None], [None], [None]
         # Fit two regression lines to data. For this, search breaking point between
         #     third and 11th data point for which the fit is best
         reg1, reg2, isp, fit = self.fit2lines(kkk, d, n0, n1, n2, True)
@@ -2445,7 +2448,7 @@ class Main(QtWidgets.QWidget):
         Ny = np.array(ndat / 2, dtype=int)
         # Set parameters depending on measurement direction
         d = self.dat[self.actual_plotted_file].data[0]["direction"]
-        if d in ("N", "S"):
+        if d in ("N", "S", 0., 180.):
             direction = 0
         else:
             direction = 1
@@ -2783,7 +2786,7 @@ class Main(QtWidgets.QWidget):
                 n2y = j + nwiny2
                 ypos[jj] = self.y_inter[j]
                 data = self.sensor1_inter[n1y:n2y, i]
-                depth1, depth2, isplit1, intercept1, intercept2, fit1, dd, kk = (
+                depth1, depth2, isplit1, intercept1, intercept2, fit1, dd, kk, _, _ = (
                     self.spector_line(data, dy, n_Ny, half_width)
                 )
                 depths1[jj, ii] = depth1
@@ -2792,7 +2795,7 @@ class Main(QtWidgets.QWidget):
                 intercepts2[jj, ii] = intercept2
                 isplits1[jj, ii] = isplit1
                 data = self.sensor1_inter[j, n1x:n2x]
-                depth3, depth4, isplit2, intercept3, intercept4, fit2, dd, kk = (
+                depth3, depth4, isplit2, intercept3, intercept4, fit2, dd, kk, _, _ = (
                     self.spector_line(data, dx, n_Ny, half_width)
                 )
                 depths3[jj, ii] = depth3
@@ -3462,8 +3465,8 @@ class Main(QtWidgets.QWidget):
             s_best = 1.0e10
             i_best = 0.0
             x_best = 0.0
-            depth_min = 0.0
-            depth_max = 0.0
+            # depth_min = 0.0
+            # depth_max = 0.0
             for ll in range(nl):
                 if direct == "y":
                     d = np.copy(d2[:, ll])
@@ -3520,7 +3523,7 @@ class Main(QtWidgets.QWidget):
                     #     The regression line is calculated using the squared amplitude as weight.
                     #     In this way, the high amplitudes have a stonger weight for the inversion
                     #     than the small ones.
-                    #     The obtaines slope is the inverse of the parameter alpha, the intercept
+                    #     The obtained slope is the inverse of the parameter alpha, the intercept
                     #     corresponds to (depth/alpha)**2
 
                     # Calculate inverse of squared amplitude (add a small value to avoid
@@ -3603,7 +3606,7 @@ class Main(QtWidgets.QWidget):
                                     f"h:{depth[-1]:0.1f}, al:{alpha[-1]:0.2f}",
                                 )
                 if ll == nline:
-                    self.ax_sig.legend(bbox_to_anchor=(1, 1), loc="upper right")
+                        self.ax_sig.legend(bbox_to_anchor=(1, 1), loc="upper right")
             slope = np.array(slope)
             intercept = np.array(intercept)
             alpha = np.array(alpha)
@@ -3630,6 +3633,13 @@ class Main(QtWidgets.QWidget):
             self.fig_sig.close()
             # Plot the obtained depths onto map of analytic signal
             #            vmin = np.quantile(depth,0.01)
+            if len(depth) == 0:
+                _ = QtWidgets.QMessageBox.warning(None, "Warning",
+                    "No depths calculated\n\n"
+                    + f"Probably you placed the threshold too high ({dmin})\n\n"
+                    + "try again with larger threshold.",
+                    QtWidgets.QMessageBox.Close, QtWidgets.QMessageBox.Close)
+                continue
             vmin = depth.min()
             vmax = np.quantile(depth, 0.99)
             nc = -int(np.log10(vmax)) + 2

@@ -48,7 +48,7 @@
             
   <section id="module-Pymagra.utilities.utilities">
 <span id="pymagra-utilities-utilities"></span><h1>Pymagra.utilities.utilities<a class="headerlink" href="#module-Pymagra.utilities.utilities" title="Link to this heading">¶</a></h1>
-<p>Last modified on Aug. 26, 2024</p>
+<p>Last modified on Sep. 06, 2024</p>
 <dl class="simple">
 <dt>&#64;author: Hermann Zeyen &lt;<a class="reference external" href="mailto:hermann&#46;zeyen&#37;&#52;&#48;universite-paris-saclay&#46;fr">hermann<span>&#46;</span>zeyen<span>&#64;</span>universite-paris-saclay<span>&#46;</span>fr</a>&gt;</dt><dd><p>Université Paris-Saclay, France</p>
 </dd>
@@ -290,7 +290,7 @@ time = julian_day*86000+hour*3600+minute*60+second.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="Pymagra.utilities.utilities.Utilities.diurnal_correction">
-<span class="sig-name descname"><span class="pre">diurnal_correction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">degree</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diff_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Pymagra.utilities.utilities.Utilities.diurnal_correction" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">diurnal_correction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">degree</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Pymagra.utilities.utilities.Utilities.diurnal_correction" title="Link to this definition">¶</a></dt>
 <dd><p>Apply diurnal corrections
 The diurnal variations may come from base station data (function read_base)
 or, if no base station data exist, they are calculated in function
@@ -303,33 +303,24 @@ modified. If you need to keep the original data, you must copy them to
 other arrays before applying diurnal_correction</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>degree</strong> (<em>int</em><em>, </em><em>optional</em>) – Degree of polynom to be fitted to data. The default is 3.
-This parameter is only used if no base station data exist</p></li>
-<li><p><strong>diff_weight</strong> (<em>float</em><em>, </em><em>optional</em>) – If day_joint_flag is true, diff_weight defines the relative weight
-for the fit of the differences along the block edges with respect
-to the fit of the medians.</p></li>
-</ul>
+<dd class="field-odd"><p><strong>degree</strong> (<em>int</em><em>, </em><em>optional</em>) – Degree of polynom to be fitted to data. The default is 3.
+This parameter is only used if no base station data exist</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="Pymagra.utilities.utilities.Utilities.diurnal_variation">
-<span class="sig-name descname"><span class="pre">diurnal_variation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lines</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">degree</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diff_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Pymagra.utilities.utilities.Utilities.diurnal_variation" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">diurnal_variation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">times</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">degree</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Pymagra.utilities.utilities.Utilities.diurnal_variation" title="Link to this definition">¶</a></dt>
 <dd><p>Calculate a fit of degree “degree” to the data of lines “lines” which
 will be used for correction of diurnal variations if not base station
 data exist</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>lines</strong> (<em>1D numpy int array</em>) – Numbers of the lines to be used for calculation of diurnal variations.
-If several files have been loaded, acquired at different days, the
-fit may be calculated independently for every day.</p></li>
+<li><p><strong>times</strong> (<em>1D numpy float array</em>) – Times for the data to be fitted in seconds</p></li>
+<li><p><strong>data</strong> (<em>1D numpy float array</em>) – Data to be fitted (usually a series of line medians)</p></li>
 <li><p><strong>degree</strong> (<em>int</em><em>, </em><em>optional</em>) – Degree of polynom to be fitted to data. The default is 3.</p></li>
-<li><p><strong>diff_weight</strong> (<em>float</em><em>, </em><em>optional</em>) – If all blocks are inverted together, diff_weight is the weight
-given to fit of differences along the edges with respect to fit
-of medians in each block. The default is 1.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>

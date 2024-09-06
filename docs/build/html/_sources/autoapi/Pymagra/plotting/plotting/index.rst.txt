@@ -5,7 +5,7 @@ Pymagra.plotting.plotting
 
 .. autoapi-nested-parse::
 
-   Last modified on Aug 26, 2024
+   Last modified on Sep 04, 2024
 
    @author: Hermann Zeyen <hermann.zeyen@universite-paris-saclay.fr>
             Université Paris-Saclay, France
@@ -54,6 +54,7 @@ Module Contents
        - toggle_geography_flag
        - plot_geography
        - plot_lineaments
+       - plot_north
        - plot_triang
        - plot_image
        - addMPL

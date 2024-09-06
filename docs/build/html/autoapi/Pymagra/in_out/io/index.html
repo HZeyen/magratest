@@ -48,7 +48,7 @@
             
   <section id="module-Pymagra.in_out.io">
 <span id="pymagra-in-out-io"></span><h1>Pymagra.in_out.io<a class="headerlink" href="#module-Pymagra.in_out.io" title="Link to this heading">¶</a></h1>
-<p>Last modified on Aug 26, 2024</p>
+<p>Last modified on Sep 06, 2024</p>
 <dl class="simple">
 <dt>&#64;author: Hermann Zeyen &lt;<a class="reference external" href="mailto:hermann&#46;zeyen&#37;&#52;&#48;universite-paris-saclay&#46;fr">hermann<span>&#46;</span>zeyen<span>&#64;</span>universite-paris-saclay<span>&#46;</span>fr</a>&gt;</dt><dd><p>University Paris-Saclay, France</p>
 </dd>
@@ -205,7 +205,7 @@ may be “POINT” or “LINE”</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="Pymagra.in_out.io.Data">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Pymagra.in_out.io.</span></span><span class="sig-name descname"><span class="pre">Data</span></span><a class="headerlink" href="#Pymagra.in_out.io.Data" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Pymagra.in_out.io.</span></span><span class="sig-name descname"><span class="pre">Data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_block</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Pymagra.in_out.io.Data" title="Link to this definition">¶</a></dt>
 <dd><p>Class contains methods for data management in program PyMaGra</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="Pymagra.in_out.io.Data.sensor1">
@@ -333,8 +333,8 @@ may be “POINT” or “LINE”</p>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="Pymagra.in_out.io.Data.n_blocks">
-<span class="sig-name descname"><span class="pre">n_blocks</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#Pymagra.in_out.io.Data.n_blocks" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="Pymagra.in_out.io.Data.n_block">
+<span class="sig-name descname"><span class="pre">n_block</span></span><a class="headerlink" href="#Pymagra.in_out.io.Data.n_block" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -504,12 +504,13 @@ self.sensor_n (1D array) and self.sensor_n_inter (2D array)</p>
 <li><p><strong>z</strong> (<em>numpy float array</em>) – height of lower sensor above ground of all data points.</p></li>
 <li><p><strong>time</strong> (<em>numpy int array</em>) – second of day of acquisition of all data points extracted.</p></li>
 <li><p><strong>mask</strong> (<em>bool</em>) – mask whether data should be plotted (True) or not (False)</p></li>
-<li><p><strong>direction</strong> (<em>str</em>) – may be “N”, “S”, “W” or “E”, indicates the approximate line direction</p></li>
+<li><p><strong>direction</strong> (<em>str</em>) – Line direction with respect to magnetic North (positive from N to E)</p></li>
 <li><p><strong>sensor</strong> (<em>int</em>) – if 0, two sensors are used in vertical configuration. 1 if only one
 sensor was used or sensor 1 in horizontal configuration. 2: sensor 2
 in horizontal configuration.</p></li>
 <li><p><strong>median1</strong> (<em>float</em>) – Median value of line for data of sensor1.</p></li>
-<li><p><strong>median2</strong> (<em>0 float</em>) – Median value of line for data of sensor2.</p></li>
+<li><p><strong>median2</strong> (<em>float</em>) – Median value of line for data of sensor2.</p></li>
+<li><p><strong>block</strong> (<em>int</em>) – Number of data set having been read</p></li>
 </ul>
 </p>
 </dd>
@@ -533,6 +534,15 @@ only one zero.</p></li>
 <li><p>”y”:  Numpy float array with N-S coordinates of data points</p></li>
 <li><p>”grad_flag” bool. True if 2 sensors were used, False if only one sensor</p></li>
 <li><p>”mask”: bool, True if line should be plotted, False if excluded from plotting</p></li>
+<li><p>”direction”: str, direction of a line with respect to magnetic N
+positive from N to E</p></li>
+<li><p>”sensor”:
+if 0, two sensors are used in vertical configuration. 1 if only one
+sensor was used or sensor 1 in horizontal configuration. 2: sensor 2
+in horizontal configuration.</p></li>
+<li><p>”median1”: float, median of data from sensor 1</p></li>
+<li><p>”median2”: float, median of data from sensor 2</p></li>
+<li><p>”block”: int, number of data set having been read</p></li>
 </ul>
 </p>
 </dd>
@@ -646,7 +656,7 @@ normally by muting erroneous data</p>
 <li><a class="reference internal" href="#Pymagra.in_out.io.Data.line_declination"><code class="docutils literal notranslate"><span class="pre">Data.line_declination</span></code></a></li>
 <li><a class="reference internal" href="#Pymagra.in_out.io.Data.interpol"><code class="docutils literal notranslate"><span class="pre">Data.interpol</span></code></a></li>
 <li><a class="reference internal" href="#Pymagra.in_out.io.Data.data"><code class="docutils literal notranslate"><span class="pre">Data.data</span></code></a></li>
-<li><a class="reference internal" href="#Pymagra.in_out.io.Data.n_blocks"><code class="docutils literal notranslate"><span class="pre">Data.n_blocks</span></code></a></li>
+<li><a class="reference internal" href="#Pymagra.in_out.io.Data.n_block"><code class="docutils literal notranslate"><span class="pre">Data.n_block</span></code></a></li>
 <li><a class="reference internal" href="#Pymagra.in_out.io.Data.n_lines"><code class="docutils literal notranslate"><span class="pre">Data.n_lines</span></code></a></li>
 <li><a class="reference internal" href="#Pymagra.in_out.io.Data.n_data"><code class="docutils literal notranslate"><span class="pre">Data.n_data</span></code></a></li>
 <li><a class="reference internal" href="#Pymagra.in_out.io.Data.direction"><code class="docutils literal notranslate"><span class="pre">Data.direction</span></code></a></li>
