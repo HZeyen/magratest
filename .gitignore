@@ -6,3 +6,5 @@ doc
 __pycache__
 zeyen
 PyMaGra.egg-info/
+build/
+recipes/
