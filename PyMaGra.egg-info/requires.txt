@@ -1,5 +1,0 @@
-pathlib
-datetime
-scikit-learn
-numpy
-matplotlib
